@@ -1,0 +1,56 @@
+<hr>
+<h1>Ejemplos con directivas</h1>
+
+<h3>Directivo ngIf-else</h3>
+
+<h2>Registro palas de pádel:</h2>
+
+Marca: <input type="text" name="marca" [(ngModel)]="marca"><br>
+Modelo: <input type="text" name="modelo" [(ngModel)]="modelo"><br><br>
+<input type="submit" value="Registrar" (click)="registrarPala()"><br>
+
+<!--Directiva ngIf-else El párrafo sólo aparecerá si se pulsa en el botón
+Si registrado==true mostramos el mensaje-->
+<!--Identificador else que hay que desarrollar. Hay que asociar el identificador
+con el template usando # dentro de la etiqueta-->
+<p *ngIf="registrado else noRegistro;" >{{mensaje}}. Pala: {{marca}} {{modelo}}</p>
+<!--Etiqueta ngTemplate para que nos diga que en caso de campos
+  vacío no hay nada registrado. De primeras no aparece-->
+  <ng-template #noRegistro>
+    <p>No se ha insertado la pala</p>
+  </ng-template>
+
+  <h3>Directiva ngFor:</h3>
+  <ul>
+    <!--Define una variable registro por cada elemento que hay en registros-->
+    <li *ngFor="let registro of registros; let i=index">
+      Registro {{i}}: {{registro.titulo}}
+    </li>
+
+  </ul>
+
+  <h3>Directiva ngSwitch:</h3>
+
+  <div [ngSwitch]="opcionSeleccionada">
+    <p *ngSwitchCase="'opcion1'">Has seleccionado la opción 1</p>
+    <p *ngSwitchCase="'opcion2'">Has seleccionado la opción 2</p>
+    <p *ngSwitchDefault>Selecciona una opción</p>
+  </div>
+
+  <button (click)="seleccionarOpcion('opcion1')">Opción 1</button>&nbsp;&nbsp;
+  <button (click)="seleccionarOpcion('opcion2')">Opción 2</button>
+
+  <h3>Directiva ngTemplate:</h3>
+
+  <ng-container *ngIf="array.length != ''; else bloqueElse">
+    <ng-container *ngFor="let arr of array">
+      <h5>{{arr.nombre}}</h5>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #bloqueElse>
+    <p>No hay contenido</p>
+  </ng-template>
+
+
